@@ -180,6 +180,13 @@
                             $('.loading-spinner').fadeOut(200, function() {
                                 $('#macros').fadeIn(200);
                                 setActivePage(p_num);
+
+                                $('.container-2').imagesLoaded(function () {
+                                    $('.container-2').masonry({
+                                        itemSelector: '.item',
+                                        animate: true
+                                    });
+                                });
                             });
                         }
                     });
