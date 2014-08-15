@@ -1,0 +1,55 @@
+/*!
+ * Start Bootstrap - 4 Col Portfolio HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.item { width: 24%; padding-bottom:10px;}
+
+.item-title {
+	background-color: black;
+	width:100%;
+	color:white;
+	text-align: center;
+}
+
+.loading-spinner {
+	height: 60vh;
+	max-height: 800px;
+}
+
+#loaderImage {
+	margin: 0 auto;
+	position:relative;
+	top:35%;
+}
+
+@media only screen and (max-width: 1000px) {
+	.item {
+		width: 32%;
+	}
+}
+
+@media only screen and (max-width: 750px) {
+	.item {
+		width: 45%;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.item {
+		width: 95%;
+	}
+}

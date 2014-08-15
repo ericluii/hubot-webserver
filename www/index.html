@@ -1,1 +1,217 @@
-Harris hihi
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Llama Tom's Hubot Macro's</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/4-col-portfolio.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Llama Tom's</a>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Macros
+                    <small>Alphabetical</small>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 loading-spinner">
+                <div id="loaderImage"></div>
+                <script type="text/javascript">
+                    var cSpeed=10;
+                    var cWidth=128;
+                    var cHeight=128;
+                    var cTotalFrames=12;
+                    var cFrameWidth=128;
+                    var cImageSrc='images/sprites.gif';
+                    
+                    var cImageTimeout=false;
+                    var cIndex=0;
+                    var cXpos=0;
+                    var cPreloaderTimeout=false;
+                    var SECONDS_BETWEEN_FRAMES=0;
+                    
+                    function startAnimation(){
+                        
+                        document.getElementById('loaderImage').style.backgroundImage='url('+cImageSrc+')';
+                        document.getElementById('loaderImage').style.width=cWidth+'px';
+                        document.getElementById('loaderImage').style.height=cHeight+'px';
+                        
+                        //FPS = Math.round(100/(maxSpeed+2-speed));
+                        FPS = Math.round(100/cSpeed);
+                        SECONDS_BETWEEN_FRAMES = 1 / FPS;
+                        
+                        cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES/1000);
+                        
+                    }
+                    
+                    function continueAnimation(){
+                        
+                        cXpos += cFrameWidth;
+                        //increase the index so we know which frame of our animation we are currently on
+                        cIndex += 1;
+                         
+                        //if our cIndex is higher than our total number of frames, we're at the end and should restart
+                        if (cIndex >= cTotalFrames) {
+                            cXpos =0;
+                            cIndex=0;
+                        }
+                        
+                        if(document.getElementById('loaderImage'))
+                            document.getElementById('loaderImage').style.backgroundPosition=(-cXpos)+'px 0';
+                        
+                        cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES*1000);
+                    }
+                    
+                    function stopAnimation(){//stops animation
+                        clearTimeout(cPreloaderTimeout);
+                        cPreloaderTimeout=false;
+                    }
+                    
+                    function imageLoader(s, fun)//Pre-loads the sprites image
+                    {
+                        clearTimeout(cImageTimeout);
+                        cImageTimeout=0;
+                        genImage = new Image();
+                        genImage.onload=function (){cImageTimeout=setTimeout(fun, 0)};
+                        genImage.onerror=new Function('alert(\'Could not load the image\')');
+                        genImage.src=s;
+                    }
+                    
+                    //The following code starts the animation
+                    new imageLoader(cImageSrc, 'startAnimation()');
+                </script>
+            </div>
+        </div>
+        <div class="row" id="macros">
+            <!-- THINGS GO HERE -->
+        </div>
+
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li id="back" data-min="1">
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li id="1" class="p-btn active">
+                        <a href="#">1</a>
+                    </li>
+                    <li id="2" class="p-btn">
+                        <a href="#">2</a>
+                    </li>
+                    <li id="next" data-max="2">
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+
+    <script>
+        var page = 1;
+
+        var setActivePage = function(p_num) {
+            $('.active').each(function() {
+                if ($(this).hasClass('p-btn')) {
+                    $(this).removeClass('active');
+                    $('#' + p_num).addClass('active');
+                }
+            })
+        }
+
+        var loadPage = function(p_num) {
+            $('#macros').fadeOut(200, function() {
+                $('.loading-spinner').fadeIn(200, function(){
+                    $("#macros").load("gen/page_" + p_num + ".html", function(response, status, xhr) {
+                        if (status == "error") {
+                            var msg = "Sorry but there was an error: ";
+                            $( "#macros" ).html( msg + xhr.status + " " + xhr.statusText );
+                            $('#macros').fadeIn(200);
+                        } else if (status == "success") {
+                            $('.loading-spinner').fadeOut(200, function() {
+                                $('#macros').fadeIn(200);
+                                setActivePage(p_num);
+                            });
+                        }
+                    });
+                });
+            });
+        };
+
+        $(document).ready(function() {
+            loadPage(1);
+        });
+
+        $('.p-btn').click(function() {
+            if (page != $(this).attr('id')) {
+                page = $(this).attr('id');
+                loadPage(page);
+            }
+        })
+
+        $('#back').click(function() {
+            if (page > $(this).attr('data-min')) {
+                page = page - 1;
+                loadPage(page);
+            }
+        });
+
+        $('#next').click(function() {
+            if (page < $(this).attr('data-max')) {
+                page = page + 1;
+                loadPage(page);
+            }
+        });
+    </script>
+</body>
+
+</html>
