@@ -49,7 +49,7 @@ paginator.append('<li id="back" data-min="1"><a href="#">&laquo;</a></li>')
 paginator.append('<li id="1" class="p-btn active"><a href="#">1</a></li>')
 cur_page = 2
 while cur_page < p_num:
-  paginator.append('<li id="' + str(cur_page) + '" class="p-btn active"><a href="#">' + str(cur_page) + '</a></li>')
+  paginator.append('<li id="' + str(cur_page) + '" class="p-btn"><a href="#">' + str(cur_page) + '</a></li>')
   cur_page = cur_page + 1;
 paginator.append('<li id="next" data-max="' + str(p_num - 1) + '">' + '<a href="#">&raquo;</a></li>')
 
