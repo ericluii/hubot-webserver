@@ -142,12 +142,13 @@
      <ul class="pagination">
       <li id="back" data-min="1"><a href="#">&laquo;</a></li>
       <li id="1" class="p-btn active"><a href="#">1</a></li>
-      <li id="2" class="p-btn active"><a href="#">2</a></li>
-      <li id="3" class="p-btn active"><a href="#">3</a></li>
-      <li id="4" class="p-btn active"><a href="#">4</a></li>
-      <li id="5" class="p-btn active"><a href="#">5</a></li>
-      <li id="6" class="p-btn active"><a href="#">6</a></li>
-      <li id="next" data-max="6"><a href="#">&raquo;</a></li>
+      <li id="2" class="p-btn"><a href="#">2</a></li>
+      <li id="3" class="p-btn"><a href="#">3</a></li>
+      <li id="4" class="p-btn"><a href="#">4</a></li>
+      <li id="5" class="p-btn"><a href="#">5</a></li>
+      <li id="6" class="p-btn"><a href="#">6</a></li>
+      <li id="7" class="p-btn"><a href="#">7</a></li>
+      <li id="next" data-max="7"><a href="#">&raquo;</a></li>
      </ul>
     </div>
    </div>
@@ -178,7 +179,7 @@
         var loadPage = function(p_num) {
             $('#macros').fadeOut(200, function() {
                 $('.loading-spinner').fadeIn(200, function(){
-                    $("#macros").load("gen/page_" + p_num + ".html", function(response, status, xhr) {
+                    $("#macros").load("gen/page_" + p_num + ".html?cache=" + (new Date()).getTime(), function(response, status, xhr) {
                         if (status == "error") {
                             var msg = "Sorry but there was an error: ";
                             $( "#macros" ).html( msg + xhr.status + " " + xhr.statusText );
